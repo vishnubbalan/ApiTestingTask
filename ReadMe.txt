@@ -1,7 +1,7 @@
 The test is writen in C# and is a unit test project. 
 So before execution ; make sure you had installed visual studio and latest version of .net framework.
 Once downloaded, open the solution in Visual Studio, build it and execute the following three test cases.
-Tsst Cases -> Verify_Name_6327, Verify_CanRelist_6327, Verify_Promotion_6327
+Test Cases -> Verify_Name_6327, Verify_CanRelist_6327, Verify_Promotion_6327
 
 - "Data.cs" contains the classes which corresponds to the JSON responce object. 
 - "ApiTestCases.cs" contains three test cases which corresponds to the validation of the given three acceptance criteria
