@@ -14,7 +14,10 @@ namespace AssurityApiTest
 
         public string GetJsonResponce(string url)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            //SecurityProtocolType.Tls12 is for .Net 4.5
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            
+            
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.Method = "GET";
             httpWebRequest.ContentType = "application/json";
@@ -48,6 +51,8 @@ namespace AssurityApiTest
             return result;
         }
 
+
+        //Deserialize the JSON responce to the target object 
         public T Deserislize<T>(string json)
         {
             T obj = Activator.CreateInstance<T>();
@@ -58,12 +63,13 @@ namespace AssurityApiTest
             return obj;
         }
 
+
+        //Fetch and return the responce of the API
         public Data GetApiResponce(string baseUrl, string absoluteUrl, string categoryId)
         {
             string url = baseUrl + absoluteUrl.Replace("categoryid", categoryId);
-            ApiRequestHandler handler = new ApiRequestHandler();
-            string response = handler.GetJsonResponce(url);
-            Data data = handler.Deserislize<Data>(response);
+            string response = GetJsonResponce(url);
+            Data data = Deserislize<Data>(response);
             return data;
         }
             
